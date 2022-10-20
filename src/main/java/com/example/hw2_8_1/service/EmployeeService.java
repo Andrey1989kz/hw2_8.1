@@ -11,14 +11,5 @@ public interface EmployeeService {
 
     Employee find(String firstName, String lastName);
 
-    Employee minSalary(int department);
-
-    Employee maxSalary(int department);
-
-    List<Employee> department(int department);
-
-    List<Employee> printAll();
-
-    List<Employee> myEmployees();
 }
 

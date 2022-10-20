@@ -1,6 +1,7 @@
 package com.example.hw2_8_1.controller;
 
 import com.example.hw2_8_1.model.Employee;
+import com.example.hw2_8_1.service.DepartmentsService;
 import com.example.hw2_8_1.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +14,13 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeController {
     private final EmployeeService employeeService;
+    private final DepartmentsService departmentService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, DepartmentsService departmentService) {
         this.employeeService = employeeService;
+        this.departmentService = departmentService;
     }
+
 
     @GetMapping(path = "/add")
     public Object add(
@@ -64,7 +68,7 @@ public class EmployeeController {
             @RequestParam(value = "departmentId") int departmentId) {
         Employee employee = null;
         try {
-            employee = employeeService.maxSalary(departmentId);
+            employee = departmentService.maxSalary(departmentId);
         } catch (Throwable e) {
             return e.getMessage();
         }
@@ -76,7 +80,7 @@ public class EmployeeController {
             @RequestParam(value = "departmentId") int departmentId) {
         Employee employee = null;
         try {
-            employee = employeeService.minSalary(departmentId);
+            employee = departmentService.minSalary(departmentId);
         } catch (Throwable e) {
             return e.getMessage();
         }
@@ -88,7 +92,7 @@ public class EmployeeController {
             @RequestParam(value = "departmentId") int departmentId) {
         List<Employee> employees = null;
         try {
-            employees = employeeService.department(departmentId);
+            employees = departmentService.department(departmentId);
         } catch (Throwable e) {
             return e.getMessage();
         }
@@ -99,7 +103,7 @@ public class EmployeeController {
     public Object printAll() {
         List<Employee> employees = null;
         try {
-            employees = employeeService.printAll();
+            employees = departmentService.printAll();
         } catch (Throwable e) {
             return e.getMessage();
         }
@@ -110,7 +114,7 @@ public class EmployeeController {
     public Object myEmployee() {
         List<Employee> employees = null;
         try {
-            employees = employeeService.myEmployees();
+            employees = departmentService.myEmployees();
         } catch (Throwable e) {
             return e.getMessage();
         }
